@@ -166,7 +166,7 @@ class TestReporter {
 
     const {listSuites, listTests, onlySummary, useActionsSummary, badgeTitle} = this
 
-    let baseUrl = ''
+    let baseUrl = github.context.serverUrl + '/' + github.context.repo.owner + '/' + github.context.repo.repo + '/actions/runs/' + github.context.runNumber
     if (this.useActionsSummary) {
       const summary = getReport(results, {listSuites, listTests, baseUrl, onlySummary, useActionsSummary, badgeTitle})
 
