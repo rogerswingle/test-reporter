@@ -206,7 +206,7 @@ function getSuitesReport(tr: TestRunResult, runIndex: number, options: ReportOpt
           const tsName = s.name
           const skipLink = options.listTests === 'none' || (options.listTests === 'failed' && s.result !== 'failed')
           const tsAddr = options.baseUrl + makeSuiteSlug(runIndex, suiteIndex).link
-          const tsNameLink = link(tsName, tsAddr)
+          const tsNameLink = skipLink ? tsName : link(tsName, tsAddr)
           const passed = s.passed > 0 ? `${s.passed} ${Icon.success}` : ''
           const failed = s.failed > 0 ? `${s.failed} ${Icon.fail}` : ''
           const skipped = s.skipped > 0 ? `${s.skipped} ${Icon.skip}` : ''
