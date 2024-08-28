@@ -162,8 +162,8 @@ function getTestRunsReport(testRuns: TestRunResult[], options: ReportOptions): s
     })
 
     const resultsTable = table(
-      ['Report', 'Passed', 'Failed', 'Skipped', 'Time', 'Addr', 'Base'],
-      [Align.Left, Align.Right, Align.Right, Align.Right, Align.Right, Align.Right, Align.Right],
+      ['Report', 'Passed', 'Failed', 'Skipped', 'Time'],
+      [Align.Left, Align.Right, Align.Right, Align.Right, Align.Right],
       ...tableData
     )
     sections.push(resultsTable)
@@ -204,7 +204,7 @@ function getSuitesReport(tr: TestRunResult, runIndex: number, options: ReportOpt
         ...suites.map((s, suiteIndex) => {
           const tsTime = formatTime(s.time)
           const tsName = s.name
-//        const skipLink = options.listTests === 'none' || (options.listTests === 'failed' && s.result !== 'failed')
+          const skipLink = options.listTests === 'none' || (options.listTests === 'failed' && s.result !== 'failed')
           const tsAddr = options.baseUrl + makeSuiteSlug(runIndex, suiteIndex).link
           const tsNameLink = link(tsName, tsAddr)
           const passed = s.passed > 0 ? `${s.passed} ${Icon.success}` : ''
@@ -271,12 +271,12 @@ function getTestsReport(ts: TestSuiteResult, runIndex: number, suiteIndex: numbe
 
 function makeRunSlug(runIndex: number): {id: string; link: string} {
   // use prefix to avoid slug conflicts after escaping the paths
-  return slug(`user-content-r${runIndex}`)
+  return slug(`r${runIndex}`)
 }
 
 function makeSuiteSlug(runIndex: number, suiteIndex: number): {id: string; link: string} {
   // use prefix to avoid slug conflicts after escaping the paths
-  return slug(`user-content-r${runIndex}s${suiteIndex}`)
+  return slug(`r${runIndex}s${suiteIndex}`)
 }
 
 function getResultIcon(result: TestExecutionResult): string {
